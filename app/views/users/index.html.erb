@@ -1,0 +1,7 @@
+<% @title="Users" %>
+<ul>
+    <% @user.each do |user|%>
+        <li><%= link_to user.login, "/users/#{user.id}" %></li>
+        <%end%>
+</ul>
+            

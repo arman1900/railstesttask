@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Railstesttask</title>
+      <%= csrf_meta_tags %>
+      <%= csp_meta_tag %>
+      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+      <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+      <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+      <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+      <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+   </head>
+   <body>
+   
+      <div class="container">
+         <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="/">Railstesttask</a>
+            <p class="navbar-text pull-right">
+               <% if signed_in? %>
+               Userid: <%= current_user.id %> / Logged in as <strong><%= current_user.login %></strong>.
+               <%= link_to 'Edit profile', edit_user_path(current_user.id), :class => 'navbar-link' %> |
+               <%= link_to "Logout", logout_path(current_user.id), method: :delete, :class => 'navbar-link'  %>
+               <% else %>
+               <%= link_to "Sign up", new_user_path, :class => 'navbar-link'  %> |
+               <%= link_to "Login", login_path, :class => 'navbar-link'  %>
+               <% end %>
+            </p>
+         </nav>
+         <div class="row">
+            <% if notice %>
+              <p class="alert alert-success"><%= notice %></p>
+            <% end %>
+            <% if alert %>
+             <p class="alert alert-danger"><%= alert %></p>
+            <% end %>
+            <div class="col-sm-4 col-md-3 sidebar">
+               <div class="mini-submenu">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+               </div>
+               <div class="list-group">
+               <%if is_client?%>
+                  <a href="/posts/new" class="list-group-item">
+                  <i class="fa fa-comment-o"></i> Новое Объявление
+                  </a>
+                  <% end %>
+                  <%if signed_in?%>
+                  <%= link_to "Мой Профиль", "/users/#{current_user.id}", :class=> 'list-group-item'%>
+                  <% end %>
+                  <a href="/users" class="list-group-item">
+                  <i class="fa fa-user"></i> Список Пользователей
+                  </a>
+                  <a href="#" class="list-group-item">
+                  <i class="fa fa-folder-open-o"></i> Lorem ipsum <span class="badge">14</span>
+                  </a>
+                  <a href="#" class="list-group-item">
+                  <i class="fa fa-bar-chart-o"></i> Lorem ipsumr <span class="badge">14</span>
+                  </a>
+                  <a href="#" class="list-group-item">
+                  <i class="fa fa-envelope"></i> Lorem ipsum
+                  </a>
+               </div>
+            </div>
+            <div class="col-sm-8 col-md-9">
+              <%= yield %>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

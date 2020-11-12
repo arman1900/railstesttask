@@ -1,0 +1,55 @@
+<%@title="Signup"%>
+
+
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">  
+		<h1>Register</h1>
+<%= form_for @user do |f| %>
+	<% if @user.errors %>
+		<ul>
+			<% @user.errors.full_messages.each do |m|%>
+				<li><%= m %></li>
+			<% end %>
+		</ul>
+	<% end %>
+	<div class="form-group">
+		<%= f.text_field :name, placeholder: "name",class:"form-control" %>
+	</div>
+	<div class="form-group">
+		<%= f.text_field :login, placeholder: "login",class:"form-control" %>
+	</div>
+	<div class="form-group">
+		<%= f.text_field :email, placeholder: "email",class:"form-control" %>
+	</div>
+	<div class="form-group">
+		<%= f.text_field :country, placeholder: "country",class:"form-control" %>
+	</div>
+	<div class="form-group">
+		<%= f.text_field :zip, placeholder: "zip",class:"form-control" %>
+	</div>
+	<div class="form-group">
+		<%= f.text_field :state, placeholder: "state",class:"form-control" %>
+	</div>
+	<div class="form-group">
+	<%= f.select(:role, [['Client', 'client'], ['Worker', 'worker']]) %>
+	</div>
+	<div class="form-group">
+		<%= f.text_field :address, placeholder: "address",class:"form-control" %>
+	</div>
+	<div class="form-group">
+		<%= f.text_field :city, placeholder: "city",class:"form-control" %>
+	</div>
+	<div class="form-group">
+	<%= f.date_select :birthday, {order: [:month, :day, :year], prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }, start_year: Date.today.year - 18, end_year: Date.today.year - 100}, {required: true} %>
+	</div>
+	<div class="form-group">
+		<%= f.password_field :password, placeholder: "password",class:"form-control" %>
+	</div>
+	<div class="form-group">
+		<%= f.password_field :password_confirmation, placeholder: "password_confirmation",class:"form-control" %>
+	</div>
+		<%= f.submit :submit,class:"btn btn-primary" %>
+<% end %>
+</div>
+</div>

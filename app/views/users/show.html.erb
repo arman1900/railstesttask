@@ -1,0 +1,12 @@
+<% @title="Your Profile"%>
+
+  <div class="row">
+	  <div class="col-md-3">
+      <h2><%= @user.login %></h2>
+        <h3><%= @user.email %></h3>
+        <h3><%= @user.role %></h3>
+        <p>
+      <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=17&size=400x300&markers=size:small%7Ccolor:red%7C#{@location.latitude},#{@location.longitude}&key=#{Rails.application.credentials.google_maps_api_key}", alt: "Map" %>
+    </p>
+  </div>
+  </div>

@@ -1,0 +1,15 @@
+
+  <div class="row">
+	  <div class="col-md-3">
+      <% unless @post.user.avatar.attachment.nil? %>
+        <%= image_tag @post.user.avatar, height: 200, class: "img-fluid" %>
+      <% else %>
+        <img src="https://www.bsn.eu/wp-content/uploads/2016/12/user-icon-image-placeholder-300-grey.jpg", height = 200,class="img-fluid">
+      <% end %> 
+      <h2><%= @post.user.login %></h2>
+       <h4><%= @post.body %></h4> 
+
+       <p>Comments: <%= render @post.comments %></p>
+       <%= link_to "Add Comment", new_comment_path(post_id: @post.id) %>
+  </div>
+  </div>

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :users
   resources :posts
   resources :password_resets
+  resources :comments
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"  
   delete "/logout", to: "sessions#destroy"

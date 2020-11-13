@@ -1,9 +1,13 @@
 class PostsController < ApplicationController
     before_action :client, only: [:create,:new]
+    def index
+        @posts = Post.paginate(page: params[:page], per_page: 20)
+    end
     def create
         @post = Post.new(post_params)
         @post.user_id = current_user.id
         if @post.save
+            flash[:success] = "Post successfully added."
             redirect_to root_path
         else
             render :new

@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-    before_action :client
+    before_action :client, only: [:create,:new]
     def create
         @post = Post.new(post_params)
         @post.user_id = current_user.id
@@ -15,6 +15,12 @@ class PostsController < ApplicationController
     def destroy
         Post.find(params[:id]).destroy! 
         redirect_to post
+    end
+    def show 
+        @post = Post.find(params[:id])
+    end
+    def feed
+        @post = Post.where(user_id: current_user.id)
     end
     private 
     def client

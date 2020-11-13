@@ -2,13 +2,20 @@
 <div class="container">
            <div class= "jumbotron">
                  <h1>Прототип Сервиса Поиска исполнителей</h1>
+                 <% if !signed_in?%>
             <%= link_to "Sign in", login_path, class:"btn btn-primary"%>
             <%= link_to "Register", new_user_path, class:"btn btn-outline-info"%>
+            <%end%>
             </div>
 
             <div class="col-md-9">
                 <ul>
                 <% @post.each do |p|%>
+                    <% if p.user.avatar.attachment%>
+                         <%= image_tag p.user.avatar,height: 50 %>
+                         <%else %>
+                         <img src="https://www.bsn.eu/wp-content/uploads/2016/12/user-icon-image-placeholder-300-grey.jpg", height = 50,class="img-fluid">
+                    <%end%>
                     <li><%= link_to p.user.login, "/users/#{p.user.id}" %></li>
                     <p><%= p.body %></p>
                 <%end%>

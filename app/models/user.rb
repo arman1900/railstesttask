@@ -1,9 +1,10 @@
 class User < ApplicationRecord
     has_many :posts
+    has_one_attached :avatar
     has_secure_password
     attr_accessor :remember_token
     validates_presence_of :name,:login,:email,:address,:country,:zip,:state,:role,:city,:birthday
-    validates_uniqueness_of :login
+    validates_uniqueness_of :login,:email
     validates_email_format_of :email, message: 'The email format is not correct!'
     enum role: {client: 0, worker: 1, admin: 2}
 
@@ -12,6 +13,10 @@ class User < ApplicationRecord
 
     def location
         [address, city, country].compact.join(', ')
+    end
+
+    def avatar_thumbnail
+        avatar.variant(resize: "150x150!").processed    
     end
     def send_password_reset
         generate_token(:password_reset_token)

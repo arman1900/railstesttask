@@ -4,10 +4,14 @@ class UsersController < ApplicationController
         if @user.save
             redirect_to @user
         else
+            flash[:notice] ="You successfully registered"
             render :new
         end
     end
-    def new 
+    def new
+        if signed_in?
+            redirect_to root_path 
+        end
         @user = User.new
     end
     def index
@@ -36,6 +40,6 @@ class UsersController < ApplicationController
     end
     private
     def user_params
-		params.require(:user).permit(:zip,:country,:city,:state,:role,:login,:name,:email, :password, :address,:password_confirmation,:birthday)
+		params.require(:user).permit(:avatar,:zip,:country,:city,:state,:role,:login,:name,:email, :password, :address,:password_confirmation,:birthday)
     end
 end

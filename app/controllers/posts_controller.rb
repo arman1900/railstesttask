@@ -1,7 +1,11 @@
 class PostsController < ApplicationController
     before_action :client, only: [:create,:new]
     def index
-        @posts = Post.paginate(page: params[:page], per_page: 20)
+        if params[:search]
+            @posts = Post.search(params[:search]).order("created_at DESC")
+        else
+            @posts = Post.all.paginate(page: params[:page], per_page: 20)
+        end
     end
     def create
         @post = Post.new(post_params)

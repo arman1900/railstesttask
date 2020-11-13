@@ -11,7 +11,9 @@
         <h3><%= @user.email %></h3>
         <h3><%= @user.role %></h3>
         <p>
+        <%if @location%>
       <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=17&size=400x300&markers=size:small%7Ccolor:red%7C#{@location.latitude},#{@location.longitude}&key=#{Rails.application.credentials.google_maps_api_key}", alt: "Map" %>
+      <%end%>
     </p>
   </div>
   </div>

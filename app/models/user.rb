@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-    has_many :posts
+    has_many :posts,dependent: :destroy
     has_one_attached :avatar
     has_secure_password
     attr_accessor :remember_token

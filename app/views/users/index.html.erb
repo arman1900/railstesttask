@@ -2,6 +2,10 @@
 <ul>
     <% @user.each do |user|%>
         <li><%= link_to user.login, "/users/#{user.id}" %></li>
+        <% if is_admin?%>
+        <td><%= link_to "Edit User", :action => :edit,:controller=>"users", :id =>user.id %></td>
+        <td><%= link_to "Delete User", user_path(user.id),method: :delete,data: {confirm: "Are you sure"} %></td>
+        <% end %>
         <%end%>
 </ul>
             

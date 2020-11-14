@@ -8,7 +8,7 @@
       <% end %> 
       <h2><%= @post.user.login %></h2>
        <h4><%= @post.body %></h4> 
-
+      <h5><%= link_to 'Edit', :action => :edit, :id => @post.id %></h5>
        <p>Comments: <%= render @post.comments %></p>
        <%= link_to "Add Comment", new_comment_path(post_id: @post.id) %>
   </div>

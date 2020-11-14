@@ -22,13 +22,33 @@ class PostsController < ApplicationController
     end
     def destroy
         Post.find(params[:id]).destroy! 
-        redirect_to post
+        redirect_to posts_path
     end
     def show 
         @post = Post.find(params[:id])
     end
     def feed
         @post = Post.where(user_id: current_user.id)
+    end
+    def edit
+        @post = Post.find(params[:id])
+        if !current_user?(@post.user.id)
+            redirect_to root_path 
+        end 
+    end
+    def update
+        begin
+            @post = Post.find(params[:id])
+        rescue
+            flash[:error] = "Post does not exixt"
+        ensure 
+            if @post.update_attributes(post_params)
+                flash[:notice] = "You succesfully edited your post"
+                redirect_to posts_path
+            else
+                render :new
+            end
+        end
     end
     private 
     def client

@@ -15,7 +15,7 @@
 <hr />
 <table>
   <tr>
-    <th>User</th>
+    <th>Author</th>
     <th>Text</th>
   </tr>
  <tr>
@@ -29,7 +29,7 @@
                          <%else %>
                          <img src="https://www.bsn.eu/wp-content/uploads/2016/12/user-icon-image-placeholder-300-grey.jpg", height = 50,class="img-fluid">
                     <%end%><td>
-      <td><%= link_to 'Show', :action => :show,:controller=>"posts", :id => p.id %></td>
+      <th><%= link_to 'Show', :action => :show,:controller=>"posts", :id => p.id %></th>
       <td><%= link_to p.user.login, "/users/#{p.user.id}" %></td>
       <td><%= p.body %></td>
     </tr>

@@ -12,7 +12,30 @@
         <h3><%= @user.role %></h3>
         <p>
         <%if @location%>
-      <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=17&size=400x300&markers=size:small%7Ccolor:red%7C#{@location.latitude},#{@location.longitude}&key=#{Rails.application.credentials.google_maps_api_key}", alt: "Map" %>
+        <div style='width: 600px;'>  
+  <div id="map" style='width: 600px; height: 300px;'></div>  
+</div>  
+<script type="text/javascript">
+    
+handler = Gmaps.build('Google');  
+handler.buildMap({ internal: {id: 'map'},
+    provider: {
+    }}, function(){  
+  markers = handler.addMarkers([  
+    {  
+      "lat": <%= @location.latitude%>,  
+      "lng": <%= @location.longitude%>,  
+      "picture": {  
+        "width": 40,  
+        "height": 40  
+      },  
+    }  
+  ]);  
+  handler.bounds.extendWith(markers);  
+  handler.fitMapToBounds(); 
+  handler.getMap().setZoom(13.9);
+});  
+</script>
       <%end%>
     </p>
   </div>

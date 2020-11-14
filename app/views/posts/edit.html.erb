@@ -1,0 +1,19 @@
+<% @title="Edit Post"%>
+
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <h1>Edit Post</h1>
+        <%= form_for (@post) do |f|%>
+        <% if @post.errors %>
+		    <ul>
+			    <% @post.errors.full_messages.each do |m|%>
+				    <li><%= m %></li>
+			    <% end %>
+		    </ul>
+	        <% end %>
+            <div class="form-group">
+            <%= f.text_area :body,class:"form-control"%>
+            </div>
+            <%= f.submit :submit,class:"btn btn-primary" %> 
+<%end%>

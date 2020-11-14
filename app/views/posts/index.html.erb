@@ -1,7 +1,12 @@
- <%= form_tag posts_path, :method => 'get'  do %>
-   <%= text_field_tag :search, params[:search]%>
-   <%= submit_tag "Search", :name => nil  %>
- <% end %>
+ <div id="forms">
+    <%= form_tag posts_path, :method=> "get" do %>
+
+      <%= label_tag :search, "search" %>
+      <%= text_field_tag :search %>
+      <%= submit_tag "Search" %> 
+    <% end %>
+
+</div>
 
 <hr />
 <table>
@@ -14,13 +19,17 @@
   <td><hr></td>
 </tr>
   <% @posts.each do |post| %>
-
+  <td><% if post.user.avatar.attachment%>
+                         <%= image_tag post.user.avatar,height: 50 %>
+                         <%else %>
+                         <img src="https://www.bsn.eu/wp-content/uploads/2016/12/user-icon-image-placeholder-300-grey.jpg", height = 50,class="img-fluid">
+                    <%end%><td>
     <tr>
       <td><%= post.user.login %></td>
-      <td><%= post.body %></td>
-      <td><%= link_to 'Show', :action => :show, :id => post.id %></td>
-      <td><%= link_to 'Edit', :action => :edit, :id => post.id %></td>
+      <td><%= link_to post.body , :action => :show, :id => post.id %></td>
+      <%if current_user?(post.user.id)%>
       <td><%= link_to 'Destroy', { :action => :destroy, :id => post.id }, :method => :delete, :confirm => 'Are you sure?' %></td>
+      <%end%>
     </tr>
     <tr>
       <td><hr></td>

@@ -29,6 +29,7 @@ gem 'validates_email_format_of'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 gem 'geocoder'
+gem 'gmaps4rails'
 gem 'will_paginate'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

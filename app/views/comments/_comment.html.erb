@@ -1,1 +1,4 @@
-<%= link_to comment.body, comment_path(comment) %>
+<div class="well">
+<p><%= link_to comment.user.name, user_path(comment.user.id) %></p>
+<p><%=comment.body%></p>
+</div>

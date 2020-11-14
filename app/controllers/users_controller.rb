@@ -15,6 +15,8 @@ class UsersController < ApplicationController
             end
         end
         @user = User.new
+        results = Geocoder.search(@user.location)
+        @location = results.first
     end
     def index
         @user = User.all
@@ -25,12 +27,14 @@ class UsersController < ApplicationController
         @location = results.first
     end
     def edit
+        @user=User.find(params[:id])
+        results = Geocoder.search(@user.location)
+        @location = results.first
         if !is_admin?
             unless current_user?(@user.id)
                 redirect_to root_path 
             end
         end
-        @user=User.find(params[:id])
     end
     def update
             begin

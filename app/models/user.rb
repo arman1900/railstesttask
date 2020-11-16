@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+    has_many :invitations
+    has_many :pending_invitations, -> {where confirmed: false}, class_name: 'Invitation', foreign_key: "worker_id"
     has_many :posts,dependent: :destroy
     has_one_attached :avatar
     has_secure_password
@@ -11,6 +13,21 @@ class User < ApplicationRecord
     before_save { self.email = email.downcase }
     before_save { self.login = login.downcase }
 
+
+    def workers 
+        workers_i_sent_invitation = Invitation.where(user_id: id, confirmed: true).pluck(:worker_id)
+        ids = workers_i_sent_invitation
+        User.where(id: ids)
+    end
+    def clients 
+        workers_i_got_invitation = Invitation.where(user_id: id, confirmed: true).pluck(:worker_id)
+        ids = workers_i_got_invitation
+        User.where(id: ids)
+    end
+    def send_invitation(user)
+        invitations.create(worker_id: user.id)
+        
+    end
     def location
         [address, city, country].compact.join(', ')
     end

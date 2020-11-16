@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  worker_id: 1
+  confirmed: false
+
+two:
+  user: two
+  worker_id: 1
+  confirmed: false

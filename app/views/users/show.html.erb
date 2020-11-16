@@ -10,6 +10,9 @@
       <h2><%= @user.login %></h2>
         <h3><%= @user.email %></h3>
         <h3><%= @user.role %></h3>
+        <%if is_client? && @user.role == "worker" %>
+        <h4><%=link_to "Invite", "invite/#{@user.id}"%><h4>
+        <%end%>
         <p>
         <%if @location%>
         <div style='width: 600px;'>  

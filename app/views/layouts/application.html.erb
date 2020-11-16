@@ -59,9 +59,11 @@
                   <a href="/posts" class="list-group-item">
                   <i class="fa fa-folder-open-o"></i> Список Объявлений <span class="badge"></span>
                   </a>
-                  <a href="#" class="list-group-item">
-                  <i class="fa fa-bar-chart-o"></i> Lorem ipsumr <span class="badge">14</span>
+                  <%if is_worker?%>
+                  <a href="/invites" class="list-group-item">
+                  <i class="fa fa-bar-chart-o"></i> Мои Приглашения <span class="badge"><%= current_user.pending_invitations.count%></span>
                   </a>
+                  <%end%>
                   <a href="#" class="list-group-item">
                   <i class="fa fa-envelope"></i> Lorem ipsum
                   </a>

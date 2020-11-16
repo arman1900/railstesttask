@@ -1,31 +1,19 @@
- <div id="forms">
-    <%= form_tag posts_path, :method=> "get" do %>
-
-      <%= label_tag :search, "search" %>
-      <%= text_field_tag :search %>
-      <%= submit_tag "Search" %> 
-    <% end %>
-
-</div>
-
-<hr />
 <table>
   <tr>
-    <th>Author</th>
-    <th>Text</th>
+    <th>Invites</th>
   </tr>
  <tr>
   <td><hr></td>
   <td><hr></td>
 </tr>
-  <% @posts.each do |p| %>
+  <% @invitations.each do |p| %>
     <tr>
       <td><% if p.user.avatar.attachment%>
                          <%= image_tag p.user.avatar,height: 50 %>
                          <%else %>
                          <img src="https://www.bsn.eu/wp-content/uploads/2016/12/user-icon-image-placeholder-300-grey.jpg", height = 50,class="img-fluid">
-                    <%end%><p><%= link_to p.user.login, "/users/#{p.user.id}" %></p>  <td>
-      <th><%= link_to p.body, :action => :show,:controller=>"posts", :id => p.id %></th>
+                    <%end%><p><%= link_to p.user.login, "/users/#{p.user.id}" %></p><td>
+                    <td><%= link_to "Accept", "/invites/#{p.id}", method: :patch %> </td>
     </tr>
     <tr>
       <td><hr></td>
